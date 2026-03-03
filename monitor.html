@@ -8,8 +8,12 @@
 <body>
 
 <div class="topbar">
-  <h2>Monitoring Page</h2>
-  <div>
+  <div class="brand-container">
+    <img src="bosch-rexroth.jpg" alt="Bosch Rexroth Logo" class="logo-topbar">
+    <h2>Monitoring Page</h2>
+  </div>
+  
+  <div class="action-buttons">
     <button id="adminBtn" onclick="openAdminPanel()" style="display:none;">Admin Panel</button>
     <button id="addBtn" onclick="showAddModal()">+ Add Dashboard</button>
     <button onclick="logout()">Logout</button>
@@ -18,13 +22,16 @@
 
 <div id="dashboardContainer" class="dashboard-container"></div>
 
-<!-- Modal -->
 <div id="modal" class="modal">
   <div class="modal-content">
-    <h3>Add Dashboard</h3>
+    <h3 id="modalTitle">Add Dashboard</h3>
+    
+    <input type="hidden" id="dashboardId"> 
+    
     <input type="text" id="dashboardName" placeholder="Dashboard Name">
     <input type="text" id="dashboardURL" placeholder="Grafana URL">
-    <button onclick="addDashboard()">Save</button>
+    
+    <button onclick="saveDashboard()">Save</button>
     <button onclick="closeModal()">Cancel</button>
   </div>
 </div>

@@ -1,35 +1,99 @@
+/* --- GLOBAL STYLES --- */
 body {
-  font-family: Arial;
-  background: #f5f5f5;
+  font-family: Arial, sans-serif;
+  background: #f0f3f5; /* Sedikit diubah agar lebih lembut */
+  margin: 0; /* Menghilangkan margin bawaan browser */
 }
 
+/* --- LOGIN PAGE --- */
 .login-container {
   width: 300px;
   margin: 150px auto;
-  padding: 20px;
+  padding: 30px 20px;
   background: white;
   border-radius: 8px;
   text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Tambahan bayangan agar elegan */
+  border-top: 5px solid #15243D; /* Aksen garis biru dongker di atas form login */
+}
+
+.login-container h2 {
+  color: #15243D; /* Warna teks judul dari background logo */
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.logo-login {
+  width: 110px; /* Nilai diubah dari 180px menjadi 110px agar proporsional */
+  height: auto; /* Tetap pertahankan rasio aspek gambar */
+  margin-bottom: 20px; /* Beri jarak yang cukup ke teks "Login" di bawahnya */
 }
 
 input {
   width: 90%;
   padding: 10px;
   margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-button {
-  padding: 10px 15px;
-  cursor: pointer;
-}
-
+/* --- MONITORING PAGE HEADER --- */
 .topbar {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  background: white;
+  align-items: center; /* Memastikan kiri dan kanan sejajar di tengah */
+  padding: 15px 30px;
+  background-color: #152c46; /* Biru Dongker dari logo Rexroth */
+  color: white; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
+.topbar h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.brand-container {
+  display: flex;
+  align-items: center; /* Membuat logo dan teks sejajar menyamping secara vertikal */
+  gap: 15px; /* Memberi jarak otomatis antara logo dan teks */
+}
+
+/* Logo di header/topbar */
+.logo-topbar {
+  height: 40px !important; /* Memaksa tinggi logo menjadi kecil seukuran teks */
+  width: auto; /* Lebar menyesuaikan otomatis agar proporsional */
+  object-fit: contain; /* Memastikan gambar tidak terpotong */
+  display: block;
+}
+
+/* --- BUTTONS --- */
+button {
+  padding: 10px 15px;
+  cursor: pointer;
+  background-color: #00A5E3; /* Biru muda/Cyan dari logo */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  margin-left: 5px;
+}
+
+button:hover {
+  background-color: #008cbf; /* Warna sedikit lebih gelap saat di-hover */
+}
+
+/* Khusus tombol logout (Aksen merah logo) */
+button[onclick="logout()"] {
+  background-color: #E4002B; 
+}
+
+button[onclick="logout()"]:hover {
+  background-color: #c40024;
+}
+
+/* --- DASHBOARD WIDGETS --- */
 .dashboard-container {
   display: flex;
   flex-wrap: wrap;
@@ -40,28 +104,38 @@ button {
 .dashboard-box {
   width: 45%;
   background: white;
-  padding: 15px;
+  padding: 20px;
   border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-left: 5px solid #00A5E3; /* Aksen biru muda di pinggir widget */
 }
 
-iframe {
-  width: 100%;
-  height: 300px;
+.dashboard-box h4 {
+  margin-top: 0;
+  color: #15243D;
 }
 
+.dashboard-actions button {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+/* --- MODAL --- */
 .modal {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(21, 36, 61, 0.7); /* Overlay transparan dengan warna dasar biru dongker */
   width: 100%;
   height: 100%;
 }
 
 .modal-content {
   background: white;
-  padding: 20px;
+  padding: 30px;
   width: 300px;
   margin: 150px auto;
+  border-radius: 8px;
+  border-top: 5px solid #00A5E3;
 }
