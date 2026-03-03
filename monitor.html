@@ -18,31 +18,6 @@
 
 <div id="dashboardContainer" class="dashboard-container"></div>
 
-<!-- ADMIN MODAL -->
-<div id="adminModal" class="modal">
-  <div class="modal-content">
-    <h3>Admin Panel</h3>
-
-    <h4>Add User</h4>
-    <input type="email" id="newUserEmail" placeholder="Email">
-    <input type="password" id="newUserPassword" placeholder="Password">
-    <select id="newUserRole">
-      <option value="user">User</option>
-      <option value="admin">Admin</option>
-    </select>
-    <button onclick="createUser()">Create User</button>
-
-    <hr>
-
-    <h4>Delete User</h4>
-    <input type="text" id="deleteUserId" placeholder="User ID">
-    <button onclick="deleteUser()">Delete User</button>
-
-    <br><br>
-    <button onclick="closeAdminPanel()">Close</button>
-  </div>
-</div>
-
 <!-- Modal -->
 <div id="modal" class="modal">
   <div class="modal-content">

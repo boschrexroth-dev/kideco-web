@@ -1,12 +1,15 @@
-const supabaseUrl = "https://ruencijrqppsegvqepyu.supabase.co";
-const supabaseKey = "sb_publishable_nAx4y8hMhzXg1CrxfkEiaQ_GvWyKEov";
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+// Inisialisasi Supabase hanya sekali
+const SUPABASE_URL = "https://ruencijrqppsegvqepyu.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ1ZW5jaWpycXBwc2VndnFlcHl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0OTE5MDYsImV4cCI6MjA4ODA2NzkwNn0.fXjGWt84W4YJFEwCeY5KXrPIplov_nEi8QYSMn4inYg"; 
 
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Login function
 async function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
     email,
     password
   });
@@ -18,52 +21,25 @@ async function login() {
   }
 }
 
+// Logout function
 async function logout() {
-  await supabase.auth.signOut();
+  await supabaseClient.auth.signOut();
   window.location.href = "index.html";
 }
 
+// Check session
 async function checkSession() {
-  const { data } = await supabase.auth.getUser();
+  const { data } = await supabaseClient.auth.getUser();
   if (!data.user) {
     window.location.href = "index.html";
   }
 }
 
-async function createUser() {
-  const email = document.getElementById("newUserEmail").value;
-  const password = document.getElementById("newUserPassword").value;
-  const role = document.getElementById("newUserRole").value;
-
-  const response = await fetch("https://your-backend-api.com/create-user", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email, password, role })
-  });
-
-  alert("User Created (if backend ready)");
-}
-
-async function deleteUser() {
-  const userId = document.getElementById("deleteUserId").value;
-
-  await fetch("https://your-backend-api.com/delete-user", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ userId })
-  });
-
-  alert("User Deleted (if backend ready)");
-}
-
+// Load dashboards
 async function loadDashboards() {
-  const { data: userData } = await supabase.auth.getUser();
+  const { data: userData } = await supabaseClient.auth.getUser();
 
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from("dashboards")
     .select("*")
     .eq("user_id", userData.user.id);
@@ -71,23 +47,28 @@ async function loadDashboards() {
   const container = document.getElementById("dashboardContainer");
   container.innerHTML = "";
 
-  data.forEach(d => {
-    container.innerHTML += `
-      <div class="dashboard-box">
-        <h4>${d.name}</h4>
-        <iframe src="${d.grafana_url}" frameborder="0"></iframe>
-      </div>
-    `;
-  });
+  if (data && data.length > 0) {
+    data.forEach(d => {
+      container.innerHTML += `
+        <div class="dashboard-box" onclick="window.open('${d.grafana_url}', '_blank')" style="cursor: pointer;">
+          <h4>${d.name}</h4>
+          <p>Click to open dashboard</p>
+        </div>
+      `;
+    });
+  } else {
+    container.innerHTML = "<p>No dashboards found. Click '+ Add Dashboard' to create one.</p>";
+  }
 }
 
+// Add dashboard
 async function addDashboard() {
   const name = document.getElementById("dashboardName").value;
   const url = document.getElementById("dashboardURL").value;
 
-  const { data: userData } = await supabase.auth.getUser();
+  const { data: userData } = await supabaseClient.auth.getUser();
 
-  await supabase.from("dashboards").insert([
+  await supabaseClient.from("dashboards").insert([
     {
       user_id: userData.user.id,
       name: name,
@@ -99,6 +80,7 @@ async function addDashboard() {
   loadDashboards();
 }
 
+// Modal functions
 function showAddModal() {
   document.getElementById("modal").style.display = "block";
 }
@@ -107,30 +89,8 @@ function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
 
-async function checkRole() {
-  const { data: userData } = await supabase.auth.getUser();
-
-  const { data, error } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", userData.user.id)
-    .single();
-
-  if (data && data.role === "admin") {
-    document.getElementById("adminBtn").style.display = "inline-block";
-  }
-}
-
-function openAdminPanel() {
-  document.getElementById("adminModal").style.display = "block";
-}
-
-function closeAdminPanel() {
-  document.getElementById("adminModal").style.display = "none";
-}
-
+// Initialize page
 if (window.location.pathname.includes("monitor.html")) {
   checkSession();
-  checkRole();
   loadDashboards();
 }
