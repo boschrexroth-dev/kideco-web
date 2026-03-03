@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Monitoring Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <h2>Monitoring Page</h2>
+  <div>
+    <button id="adminBtn" onclick="openAdminPanel()" style="display:none;">Admin Panel</button>
+    <button id="addBtn" onclick="showAddModal()">+ Add Dashboard</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<div id="dashboardContainer" class="dashboard-container"></div>
+
+<!-- ADMIN MODAL -->
+<div id="adminModal" class="modal">
+  <div class="modal-content">
+    <h3>Admin Panel</h3>
+
+    <h4>Add User</h4>
+    <input type="email" id="newUserEmail" placeholder="Email">
+    <input type="password" id="newUserPassword" placeholder="Password">
+    <select id="newUserRole">
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+    <button onclick="createUser()">Create User</button>
+
+    <hr>
+
+    <h4>Delete User</h4>
+    <input type="text" id="deleteUserId" placeholder="User ID">
+    <button onclick="deleteUser()">Delete User</button>
+
+    <br><br>
+    <button onclick="closeAdminPanel()">Close</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3>Add Dashboard</h3>
+    <input type="text" id="dashboardName" placeholder="Dashboard Name">
+    <input type="text" id="dashboardURL" placeholder="Grafana URL">
+    <button onclick="addDashboard()">Save</button>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
