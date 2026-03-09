@@ -1,8 +1,8 @@
 /* --- GLOBAL STYLES --- */
 body {
   font-family: Arial, sans-serif;
-  background: #f0f3f5; /* Sedikit diubah agar lebih lembut */
-  margin: 0; /* Menghilangkan margin bawaan browser */
+  background: #f0f3f5;
+  margin: 0;
 }
 
 /* --- LOGIN PAGE --- */
@@ -13,20 +13,20 @@ body {
   background: white;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Tambahan bayangan agar elegan */
-  border-top: 5px solid #15243D; /* Aksen garis biru dongker di atas form login */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-top: 5px solid #15243D;
 }
 
 .login-container h2 {
-  color: #15243D; /* Warna teks judul dari background logo */
+  color: #15243D;
   margin-top: 0;
   margin-bottom: 20px;
 }
 
 .logo-login {
-  width: 110px; /* Nilai diubah dari 180px menjadi 110px agar proporsional */
-  height: auto; /* Tetap pertahankan rasio aspek gambar */
-  margin-bottom: 20px; /* Beri jarak yang cukup ke teks "Login" di bawahnya */
+  width: 110px;
+  height: auto;
+  margin-bottom: 20px;
 }
 
 input {
@@ -41,10 +41,10 @@ input {
 .topbar {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Memastikan kiri dan kanan sejajar di tengah */
+  align-items: center;
   padding: 15px 30px;
-  background-color: #152c46; /* Biru Dongker dari logo Rexroth */
-  color: white; 
+  background-color: #152c46;
+  color: white;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
@@ -55,15 +55,14 @@ input {
 
 .brand-container {
   display: flex;
-  align-items: center; /* Membuat logo dan teks sejajar menyamping secara vertikal */
-  gap: 15px; /* Memberi jarak otomatis antara logo dan teks */
+  align-items: center;
+  gap: 15px;
 }
 
-/* Logo di header/topbar */
 .logo-topbar {
-  height: 40px !important; /* Memaksa tinggi logo menjadi kecil seukuran teks */
-  width: auto; /* Lebar menyesuaikan otomatis agar proporsional */
-  object-fit: contain; /* Memastikan gambar tidak terpotong */
+  height: 40px !important;
+  width: auto;
+  object-fit: contain;
   display: block;
 }
 
@@ -71,7 +70,7 @@ input {
 button {
   padding: 10px 15px;
   cursor: pointer;
-  background-color: #00A5E3; /* Biru muda/Cyan dari logo */
+  background-color: #00A5E3;
   color: white;
   border: none;
   border-radius: 4px;
@@ -81,12 +80,11 @@ button {
 }
 
 button:hover {
-  background-color: #008cbf; /* Warna sedikit lebih gelap saat di-hover */
+  background-color: #008cbf;
 }
 
-/* Khusus tombol logout (Aksen merah logo) */
 button[onclick="logout()"] {
-  background-color: #E4002B; 
+  background-color: #E4002B;
 }
 
 button[onclick="logout()"]:hover {
@@ -107,7 +105,7 @@ button[onclick="logout()"]:hover {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  border-left: 5px solid #00A5E3; /* Aksen biru muda di pinggir widget */
+  border-left: 5px solid #00A5E3;
 }
 
 .dashboard-box h4 {
@@ -120,13 +118,13 @@ button[onclick="logout()"]:hover {
   font-size: 12px;
 }
 
-/* --- MODAL --- */
+/* --- MODAL (Add Dashboard) --- */
 .modal {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(21, 36, 61, 0.7); /* Overlay transparan dengan warna dasar biru dongker */
+  background: rgba(21, 36, 61, 0.7);
   width: 100%;
   height: 100%;
 }
@@ -138,4 +136,58 @@ button[onclick="logout()"]:hover {
   margin: 150px auto;
   border-radius: 8px;
   border-top: 5px solid #00A5E3;
+}
+
+/* --- ADMIN PANEL MODAL --- */
+
+/* --- ADMIN PANEL MODAL --- */
+
+#adminPanelModal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+#adminPanelModal > div {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 480px;
+  height: 90vh; /* penting agar footer tidak keluar layar */
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+
+/* HEADER */
+#adminPanelModal .ap-header {
+  flex: 0 0 auto;
+  padding: 20px 24px 10px 24px;
+}
+
+/* USER LIST SCROLL AREA */
+#apUserContainer {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 10px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* FOOTER (CLOSE BUTTON) */
+#adminPanelModal .ap-footer {
+  flex: 0 0 auto;
+  padding: 14px 24px;
+  border-top: 1px solid #eee;
+  background: white;
+  display: flex;
+  justify-content: flex-end;
 }

@@ -3,7 +3,6 @@
 <head>
   <title>Monitoring Dashboard</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -12,30 +11,17 @@
     <img src="bosch-rexroth.jpg" alt="Bosch Rexroth Logo" class="logo-topbar">
     <h2>Monitoring Page</h2>
   </div>
-  
+
   <div class="action-buttons">
-    <button id="adminBtn" onclick="openAdminPanel()" style="display:none;">Admin Panel</button>
-    <button id="addBtn" onclick="showAddModal()">+ Add Dashboard</button>
+    <button id="btnAdminPanel" onclick="showAdminPanel()" style="display:none;">Admin Panel</button>
+    <button onclick="showAddDashboardModal()">+ Add Dashboard</button>
     <button onclick="logout()">Logout</button>
   </div>
 </div>
 
 <div id="dashboardContainer" class="dashboard-container"></div>
 
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <h3 id="modalTitle">Add Dashboard</h3>
-    
-    <input type="hidden" id="dashboardId"> 
-    
-    <input type="text" id="dashboardName" placeholder="Dashboard Name">
-    <input type="text" id="dashboardURL" placeholder="Grafana URL">
-    
-    <button onclick="saveDashboard()">Save</button>
-    <button onclick="closeModal()">Cancel</button>
-  </div>
-</div>
+<script type="module" src="./app.js"></script>
 
-<script src="app.js"></script>
 </body>
 </html>
